@@ -1,0 +1,7 @@
+# Tupfile
+
+include_rules
+
+: foreach src/*.cpp |> g++ $(CFLAGS) -c -o %o %f |> obj/%B.o {obj}
+
+: {obj} |> g++ $(CFLAGS) -o %o %f |> bin/docgen
