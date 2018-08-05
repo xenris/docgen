@@ -9,48 +9,52 @@
 #include <string.h>
 #include <vector>
 
-#include "location.hpp"
+#include "keyword.hpp"
 
-/// # class DocGen
+/// # class {{DocGen}}
+/// Class which does all the work of turning the given source files into documentation.
 class DocGen {
+    // Start of a line of documentation.
     const std::string commentStart;
 
+    // Wraps words to let docgen know that this is a keyword.
     const std::string keywordDeclerationStart = "{{";
     const std::string keywordDeclerationEnd = "}}";
 
+    // Wraps words to make docgen generate a link to the equivalent keyword.
     const std::string keywordReferenceStart = "[[";
     const std::string keywordReferenceEnd = "]]";
 
 public:
 
     /// ### DocGen(std::string commentStart)
+    /// * commentStart: The string docgen looks for at the start of each line to determine if it is a documentation line. (e.g. "///")
     DocGen(const std::string& commentStart);
 
-    int generate(int argc, char** args);
+    /// ### bool generate(std::vector<std::string> paths)
+    /// Generates documentation from the given source files.
+    /// * paths: the list of source files to turn into documentation.
+    bool generate(const std::vector<std::string>& paths);
 
 private:
 
-    bool gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Location>* const keywords);
+    bool gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Keyword>* const keywords);
 
-    bool generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Location>& keywords);
+    bool generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Keyword>& keywords);
 
-    /// ### bool getLine(std::fstream\* file, std::string\* line)
-    /// Gets the next line with documentation text only.
+    // Gets the next line and removes any irrelevant content.
     bool getLine(std::fstream* const file, std::string* const line);
 
-    /// ### bool makeDirectory(std::string path)
-    /// Generates directories.<br>
-    /// Assumes the last element is a file if there is no trailing "/" and
-    /// ignores it. e.g. "a/b/c/" will generate three directories,
-    /// and "a/b/c" will only generate two.
-    /// [[lakjflfjka]]
+    // Generates directories.
+    // Assumes the last element is a file if there is no trailing "/" and
+    // ignores it. e.g. "a/b/c/" will generate three directories,
+    // and "a/b/c" will only generate two.
     bool makeDirectory(const std::string& path);
 
     std::string getMarkdownContents(const std::string& line);
 
-    /// ### std::string getMarkdownType(std::string line)
-    /// Gets the first few relevant characters of a documentation line,
-    /// e.g. "#", "##", "\*", "  \*", or "" if it is a plain paragraph.
+    // Gets the first few relevant characters of a documentation line,
+    // e.g. "#", "##", "\*", "  \*", or "" if it is a plain paragraph.
     std::string getMarkdownType(const std::string& line);
 };
 

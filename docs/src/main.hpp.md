@@ -1,4 +1,11 @@
-# docgen, the simple and flexible (non-invasive?) documentation generator. lakjflfjka
+# docgen, a simple (both in use and in internal complexity) documentation generator.
 
-### int main(int argc, char\*\* args)
+## Features
+* Reads comments from source code and generates markdown documentation.
+* Makes linking between parts of source code easy.
+* Doesn't understand any language constructs so works equally well for all languages.
+
+### int main(int argc, char\*\* argv)
+Entry point of program.<br>
+Parses arguments and generates documentation.
 

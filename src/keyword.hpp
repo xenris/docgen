@@ -1,11 +1,12 @@
-#ifndef LOCATION_HPP
-#define LOCATION_HPP
+#ifndef KEYWORD_HPP
+#define KEYWORD_HPP
 
 #include <algorithm>
 #include <string>
 
-/// # class Location
-class Location {
+/// # class Keyword
+/// Class to temporarily store information about keywords.
+class Keyword {
     // TODO Save an unformatted version of filePath and heading for error messages.
     std::string _filePath;
     std::string _heading;
@@ -13,9 +14,9 @@ class Location {
 
 public:
 
-    Location();
+    Keyword();
 
-    Location(const std::string& filePath, const std::string& heading, int lineNumber);
+    Keyword(const std::string& filePath, const std::string& heading, int lineNumber);
 
     std::string filePath();
 
