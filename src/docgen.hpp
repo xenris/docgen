@@ -17,6 +17,9 @@ class DocGen {
     // Start of a line of documentation.
     const std::string commentStart;
 
+    // Directory where all the generated documents are placed.
+    const std::string outputDir;
+
     // Wraps words to let docgen know that this is a keyword.
     const std::string keywordDeclerationStart = "{{";
     const std::string keywordDeclerationEnd = "}}";
@@ -27,9 +30,10 @@ class DocGen {
 
 public:
 
-    /// ### DocGen(std::string commentStart)
+    /// ### DocGen(std::string commentStart, std::string outputDir)
     /// * commentStart: The string docgen looks for at the start of each line to determine if it is a documentation line. (e.g. "///")
-    DocGen(const std::string& commentStart);
+    /// * outputDir: The directory to put all the generated documents.
+    DocGen(const std::string& commentStart, const std::string& outputDir);
 
     /// ### bool generate(std::vector<std::string> paths)
     /// Generates documentation from the given source files.
@@ -56,6 +60,9 @@ private:
     // Gets the first few relevant characters of a documentation line,
     // e.g. "#", "##", "\*", "  \*", or "" if it is a plain paragraph.
     std::string getMarkdownType(const std::string& line);
+
+    // Makes sure there is a "/" at the end of the string.
+    std::string sanitiseDirectory(const std::string& dir);
 };
 
 #endif

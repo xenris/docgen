@@ -21,6 +21,18 @@ bool Args::parse(int argc, char** argv) {
                 }
 
                 commentStart = argv[i];
+            } else if(strequ(arg, "-o")) {
+                i++;
+
+                if(i >= argc) {
+                    std::cerr << "Error: Output directory specified after \"-o\"." << std::endl;
+
+                    return false;
+                }
+
+                outputDir = argv[i];
+            } else if(strequ(arg, "-d")) {
+                deleteDocs = true;
             } else if(strequ(arg, "-h")) {
                 std::cout << helpText;
 

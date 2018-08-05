@@ -19,6 +19,15 @@ struct Args {
     /// List of input files to generate documentation from.
     std::vector<std::string> paths;
 
+    /// ### bool deleteDocs
+    /// Indicates if the output documents directory should be deleted before generating new documents.
+    bool deleteDocs = false;
+
+    /// ### std::string outputDir
+    /// The directory to place the generated documents.<br>
+    /// Defaults to "docs/".
+    std::string outputDir = "docs/";
+
     /// ### bool {{Args::parse}}(int argc, char\*\* argv)
     /// Reads the given arguments, sets appropriate member variables,
     /// and returns true if all arguments were valid.

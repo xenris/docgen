@@ -1,6 +1,6 @@
 #include "docgen.hpp"
 
-DocGen::DocGen(const std::string& commentStart) : commentStart(commentStart) {
+DocGen::DocGen(const std::string& commentStart, const std::string& outputDir) : commentStart(commentStart), outputDir(sanitiseDirectory(outputDir)) {
 }
 
 bool DocGen::generate(const std::vector<std::string>& paths) {
@@ -81,7 +81,7 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
             return false;
         }
 
-        const std::string outPath = "docs/" + path + ".md";
+        const std::string outPath = outputDir + path + ".md";
 
         if(!makeDirectory(outPath)) {
             return false;
@@ -268,4 +268,12 @@ std::string DocGen::getMarkdownType(const std::string& line) {
     result = result.substr(0, i);
 
     return result;
+}
+
+std::string DocGen::sanitiseDirectory(const std::string& dir) {
+    if(*dir.end() == '/') {
+        return dir;
+    } else {
+        return dir + "/";
+    }
 }

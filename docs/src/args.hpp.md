@@ -8,6 +8,13 @@ Defaults to "///".
 ### std::vector<std::string> paths
 List of input files to generate documentation from.
 
+### bool deleteDocs
+Indicates if the output documents directory should be deleted before generating new documents.
+
+### std::string outputDir
+The directory to place the generated documents.<br>
+Defaults to "docs/".
+
 ### bool Args::parse(int argc, char\*\* argv)
 Reads the given arguments, sets appropriate member variables,
 and returns true if all arguments were valid.
