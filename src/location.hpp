@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <string>
 
-/// # Location
+/// # {{Location}}
 /// Class to temporarily store location information for keywords.<br>
 /// Also formats the location information to be used in markdown.
 class Location {
