@@ -7,5 +7,5 @@
 
 ### int main(int argc, char\*\* argv)
 Entry point of the program.<br>
-Parses arguments and generates documentation, using [Args](src/args.hpp#args), and [DocGen](src/docgen.hpp#class-docgen).
+Parses arguments and generates documentation, using [Args](args.hpp#args), and [DocGen](docgen.hpp#class-docgen).
 

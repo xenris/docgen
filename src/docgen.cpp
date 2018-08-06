@@ -124,8 +124,7 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
                 if(keywords.count(key) != 0) {
                     const Location& location = keywords.at(key);
 
-                    // TODO Make path relative to current file.
-                    const std::string linkPath = (location.filePath() == path) ? "" : location.filePath();
+                    const std::string linkPath = relativePath(location.filePath(), path);
 
                     const std::string linkStart = "[";
                     const std::string linkEnd = "](" + linkPath + "#" + location.heading() + ")";
@@ -276,4 +275,36 @@ std::string DocGen::sanitiseDirectory(const std::string& dir) {
     } else {
         return dir + "/";
     }
+}
+
+std::string DocGen::relativePath(std::string to, std::string from) {
+    int i = 0;
+
+    while(true) {
+        if(to[i] == from[i]) {
+            if(to[i] == '/') {
+                to = to.substr(i + 1);
+                from = from.substr(i + 1);
+
+                i = 0;
+            } else if(to[i] == '\0') {
+                to = "";
+                from = "";
+
+                break;
+            } else {
+                i++;
+            }
+        } else {
+            break;
+        }
+    }
+
+    for(const char c : from) {
+        if(c == '/') {
+            to = "../" + to;
+        }
+    }
+
+    return to;
 }

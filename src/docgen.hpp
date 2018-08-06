@@ -63,6 +63,8 @@ private:
 
     // Makes sure there is a "/" at the end of the string.
     std::string sanitiseDirectory(const std::string& dir);
+
+    static std::string relativePath(std::string to, std::string from);
 };
 
 #endif
