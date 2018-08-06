@@ -4,7 +4,7 @@ DocGen::DocGen(const std::string& commentStart, const std::string& outputDir) : 
 }
 
 bool DocGen::generate(const std::vector<std::string>& paths) {
-    std::map<std::string, Keyword> keywords;
+    std::map<std::string, Location> keywords;
 
     if(!gatherKeywords(paths, &keywords)) {
         return false;
@@ -17,7 +17,7 @@ bool DocGen::generate(const std::vector<std::string>& paths) {
     return true;
 }
 
-bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Keyword>* const keywords) {
+bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Location>* const keywords) {
     for(std::string path : paths) {
         std::fstream file(path, std::fstream::in);
 
@@ -52,9 +52,9 @@ bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std:
                 const std::string heading = getMarkdownContents(line);
 
                 if(keywords->count(key) == 0) {
-                    (*keywords)[key] = Keyword(path, heading, lineNumber);
+                    (*keywords)[key] = Location(path, heading, lineNumber);
                 } else {
-                    const Keyword& original = (*keywords)[key];
+                    const Location& original = (*keywords)[key];
 
                     std::cerr << path << ":" << lineNumber << " warning: keyword \"" << key << "\" redeclared." << std::endl;
                     std::cerr << "  Originally declared here: " << original.filePath() << ":" << original.lineNumber() << ": \"" << original.heading() << "\"" << std::endl;
@@ -70,7 +70,7 @@ bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std:
     return true;
 }
 
-bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Keyword>& keywords) {
+bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Location>& keywords) {
     for(const std::string path : paths) {
 
         std::fstream file(path, std::fstream::in);
@@ -122,7 +122,7 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
                 const std::string key = line.substr(start, end - start);
 
                 if(keywords.count(key) != 0) {
-                    const Keyword& location = keywords.at(key);
+                    const Location& location = keywords.at(key);
 
                     // TODO Make path relative to current file.
                     const std::string linkPath = (location.filePath() == path) ? "" : location.filePath();

@@ -9,7 +9,7 @@
 #include <string.h>
 #include <vector>
 
-#include "keyword.hpp"
+#include "location.hpp"
 
 /// # class {{DocGen}}
 /// Class which does all the work of turning the given source files into documentation.
@@ -42,9 +42,9 @@ public:
 
 private:
 
-    bool gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Keyword>* const keywords);
+    bool gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Location>* const keywords);
 
-    bool generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Keyword>& keywords);
+    bool generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Location>& keywords);
 
     // Gets the next line and removes any irrelevant content.
     bool getLine(std::fstream* const file, std::string* const line);

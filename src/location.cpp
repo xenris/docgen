@@ -1,23 +1,23 @@
-#include "keyword.hpp"
+#include "location.hpp"
 
-Keyword::Keyword() : _filePath("???"), _heading("???"), _lineNumber(0) {
+Location::Location() : _filePath("???"), _heading("???"), _lineNumber(0) {
 }
 
-Keyword::Keyword(const std::string& filePath, const std::string& heading, int lineNumber) {
+Location::Location(const std::string& filePath, const std::string& heading, int lineNumber) {
     this->filePath(filePath);
     this->heading(heading);
     this->lineNumber(lineNumber);
 }
 
-std::string Keyword::filePath() {
+std::string Location::filePath() {
     return _filePath;
 }
 
-const std::string& Keyword::filePath() const {
+const std::string& Location::filePath() const {
     return _filePath;
 }
 
-void Keyword::filePath(const std::string& s) {
+void Location::filePath(const std::string& s) {
     _filePath = s;
     int i = 0;
 
@@ -34,15 +34,15 @@ void Keyword::filePath(const std::string& s) {
     }
 }
 
-std::string Keyword::heading() {
+std::string Location::heading() {
     return _heading;
 }
 
-const std::string& Keyword::heading() const {
+const std::string& Location::heading() const {
     return _heading;
 }
 
-void Keyword::heading(const std::string& s) {
+void Location::heading(const std::string& s) {
     _heading = s;
 
     const auto isSymbol = [](char c) -> bool {
@@ -66,10 +66,10 @@ void Keyword::heading(const std::string& s) {
     std::transform(_heading.begin(), _heading.end(), _heading.begin(), tolower);
 }
 
-int Keyword::lineNumber() const {
+int Location::lineNumber() const {
     return _lineNumber;
 }
 
-void Keyword::lineNumber(int n) {
+void Location::lineNumber(int n) {
     _lineNumber = n;
 }
