@@ -35,7 +35,7 @@ public:
     /// * outputDir: The directory to put all the generated documents.
     DocGen(const std::string& commentStart, const std::string& outputDir);
 
-    /// ### bool generate(std::vector<std::string> paths)
+    /// ### bool generate(std::vector\<std::string\> paths)
     /// Generates documentation from the given source files.
     /// * paths: the list of source files to turn into documentation.
     bool generate(const std::vector<std::string>& paths);

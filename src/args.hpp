@@ -15,7 +15,7 @@ struct Args {
     /// Defaults to "///".
     std::string commentStart = "///";
 
-    /// ### std::vector<std::string> paths
+    /// ### std::vector\<std::string\> paths
     /// List of input files to generate documentation from.
     std::vector<std::string> paths;
 

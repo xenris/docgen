@@ -5,7 +5,7 @@ Helper class which parses command line arguments and turns them into useful valu
 String which indicates the start of a line of documentation.<br>
 Defaults to "///".
 
-### std::vector<std::string> paths
+### std::vector\<std::string\> paths
 List of input files to generate documentation from.
 
 ### bool deleteDocs
