@@ -32,6 +32,8 @@ void Location::filePath(const std::string& s) {
         _filePath.erase(i, 1);
         _filePath.insert(i, "%20");
     }
+
+    _filePath += ".md";
 }
 
 std::string Location::heading() {
