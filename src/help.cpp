@@ -7,4 +7,4 @@ const char* helpText =
     "-o [output directory] -> Set directory to put documents in. Default is \"docs/\".\n"
     "[file list] -> File paths to include.\n"
     "Example: docgen -c \"###\" main.hpp other.hpp\n"
-    "Wildcard example: docgen $(find src/ -name '*.hpp')\n";
+    "Wildcard example: docgen $(find src/ -iregex '.*\\..pp')\n";
