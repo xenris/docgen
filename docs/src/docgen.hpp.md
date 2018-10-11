@@ -8,4 +8,3 @@ Class which does all the work of turning the given source files into documentati
 ### bool generate(std::vector\<std::string\> paths)
 Generates documentation from the given source files.
 * paths: the list of source files to turn into documentation.
-

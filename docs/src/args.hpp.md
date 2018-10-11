@@ -23,4 +23,3 @@ and returns true if all arguments were valid.
 Compares two char arrays and returns true if they are the same.<br>
 Faster than "strcmp(a, b) == 0", because it doesn't always need to read the entire array.<br>
 Also easier to understand than "strcmp(a, b) == 0".
-

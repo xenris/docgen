@@ -96,7 +96,8 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
         }
 
         std::string line;
-        bool blankAllowed = false;
+        bool blankLineRequired = false;
+        bool hasMarkdown = false;
         int lineNumber = 1;
 
         while(getLine(&file, &line)) {
@@ -162,14 +163,18 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
                 start = end;
             }
 
-            if((line == "") && blankAllowed) {
-                outFile << line << std::endl;
+            if(line != "") {
+                hasMarkdown = true;
 
-                blankAllowed = false;
-            } else if(line != "") {
-                outFile << line << std::endl;
+                if(blankLineRequired) {
+                    outFile << std::endl;
 
-                blankAllowed = true;
+                    blankLineRequired = false;
+                }
+
+                outFile << line << std::endl;
+            } else if(hasMarkdown) {
+                blankLineRequired = true;
             }
 
             lineNumber += 1;
