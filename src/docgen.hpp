@@ -57,6 +57,8 @@ private:
 
     bool isDirectory(const std::string& path);
 
+    bool deleteFile(const std::string& filePath);
+
     std::string getMarkdownContents(const std::string& line);
 
     // Gets the first few relevant characters of a documentation line,

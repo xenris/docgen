@@ -186,6 +186,12 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
 
             lineNumber += 1;
         }
+
+        if(!hasMarkdown) {
+            outFile.close();
+
+            deleteFile(outPath);
+        }
     }
 
     return true;
@@ -237,6 +243,18 @@ bool DocGen::makeDirectory(const std::string& path) {
 
 bool DocGen::isDirectory(const std::string& path) {
     return path.back() == '/';
+}
+
+bool DocGen::deleteFile(const std::string& filePath) {
+    const std::string command = "rm " + filePath;
+
+    const int error = system(command.c_str());
+
+    if(error == -1) {
+        std::cerr << strerror(errno) << std::endl;
+    }
+
+    return error != -1;
 }
 
 std::string DocGen::getMarkdownContents(const std::string& line) {
