@@ -55,6 +55,8 @@ private:
     // and "a/b/c" will only generate two.
     bool makeDirectory(const std::string& path);
 
+    bool isDirectory(const std::string& path);
+
     std::string getMarkdownContents(const std::string& line);
 
     // Gets the first few relevant characters of a documentation line,

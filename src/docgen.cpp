@@ -19,6 +19,10 @@ bool DocGen::generate(const std::vector<std::string>& paths) {
 
 bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std::string, Location>* const keywords) {
     for(std::string path : paths) {
+        if(isDirectory(path)) {
+            continue;
+        }
+
         std::fstream file(path, std::fstream::in);
 
         if(!file) {
@@ -72,6 +76,9 @@ bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std:
 
 bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Location>& keywords) {
     for(const std::string path : paths) {
+        if(isDirectory(path)) {
+            continue;
+        }
 
         std::fstream file(path, std::fstream::in);
 
@@ -226,6 +233,10 @@ bool DocGen::makeDirectory(const std::string& path) {
     }
 
     return error != -1;
+}
+
+bool DocGen::isDirectory(const std::string& path) {
+    return path.back() == '/';
 }
 
 std::string DocGen::getMarkdownContents(const std::string& line) {
