@@ -75,6 +75,8 @@ bool DocGen::gatherKeywords(const std::vector<std::string>& paths, std::map<std:
 }
 
 bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std::map<std::string, Location>& keywords) {
+    int numDocsGenerated = 0;
+
     for(const std::string path : paths) {
         if(isDirectory(path)) {
             continue;
@@ -187,12 +189,16 @@ bool DocGen::generateDocuments(const std::vector<std::string>& paths, const std:
             lineNumber += 1;
         }
 
-        if(!hasMarkdown) {
+        if(hasMarkdown) {
+            numDocsGenerated++;
+        } else {
             outFile.close();
 
             deleteFile(outPath);
         }
     }
+
+    std::cout << numDocsGenerated << " documents generated" << std::endl;
 
     return true;
 }
