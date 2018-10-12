@@ -54,7 +54,7 @@ void Location::heading(const std::string& s) {
             return false;
         } else if((c >= '0') && (c <= '9')) {
             return false;
-        } else if(c== '-') {
+        } else if((c == '-') || (c == '_')) {
             return false;
         } else {
             return true;
